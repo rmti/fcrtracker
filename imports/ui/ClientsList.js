@@ -1,9 +1,8 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
-import { Session } from 'meteor/session';
-import { Clients } from '../api/clients';
-import ClientsListItem from './ClientsListItems';
+import {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
+import {Clients} from '../api/clients';
 import {
   Table,
   TableBody,
@@ -21,7 +20,9 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionEdit from 'material-ui/svg-icons/image/edit';
 
-const clientOne = {name: "test"};
+const clientOne = {
+  name: "test"
+};
 
 export default class ClientsList extends React.Component {
   constructor(props) {
@@ -37,15 +38,13 @@ export default class ClientsList extends React.Component {
       if (!err) {
         this.handleModalClose();
       } else {
-        this.setState({ error: err.reason });
+        this.setState({error: err.reason});
       }
     });
-}
+  }
 
   handleModalClose() {
-    this.setState({
-      error: ''
-    });
+    this.setState({error: ''});
   }
 
   componentDidMount() {
@@ -53,15 +52,19 @@ export default class ClientsList extends React.Component {
     this.handleInsert();
     this.clientsTracker = Tracker.autorun(() => {
       Meteor.subscribe('clients');
-      const clients = Clients.find({}).fetch();
-      this.setState({ clients });
+      const clients = Clients
+        .find({})
+        .fetch();
+      this.setState({clients});
       console.log(clients);
 
     });
   }
   componentWillUnmount() {
     console.log('componentWillUnmount ClientsList');
-    this.clientsTracker.stop();
+    this
+      .clientsTracker
+      .stop();
   }
   renderLinksListItems() {
     console.log("length:", this.state.clients.length)
@@ -73,25 +76,42 @@ export default class ClientsList extends React.Component {
       );
     }
     return this.state.clients.map((client) => {
-           return <ClientsListItem key={client._id} {...client}/>;
-    });
+        return <ClientsListItem key={client._id} {...client}/>;
+      });
   }
   render() {
-    return (
-      <div>
-          <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>ID</TableHeaderColumn>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {this.renderLinksListItems()}
-          </TableBody>
-        </Table>
-      </div>
+    return ( 
+    < div > 
+    <TableToolBar/>
+    <Table>
+      <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+        < TableRow >
+          <TableHeaderColumn>ID</TableHeaderColumn>
+          <TableHeaderColumn>Name</TableHeaderColumn>
+          <TableHeaderColumn>Status</TableHeaderColumn>
+        </TableRow>
+      </TableHeader>
+
+      <TableBody stripedRows={false} displayRowCheckbox={false}>
+        {this.state.clients.map((client) => {
+            return (
+              <TableRow key={client._id}>
+                <TableRowColumn>
+                  {client._id}
+                </TableRowColumn>
+                <TableRowColumn>
+                  {client.name}
+                </TableRowColumn>
+                <TableRowColumn >
+                  {client.name}
+                </TableRowColumn>
+              </TableRow>
+            );
+          })
+}
+      </TableBody>
+    </Table> 
+    </div>
     );
   }
 };

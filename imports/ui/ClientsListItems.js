@@ -12,11 +12,9 @@ export default class ClientsListItem extends React.Component {
   
   render() {
     return (
-      <div className="item">
         <TableRowColumn>{this.props._id}</TableRowColumn>
         <TableRowColumn>{this.props.name}</TableRowColumn>
         <TableRowColumn>{this.props.name}</TableRowColumn>
-      </div>
     );
   }
 };

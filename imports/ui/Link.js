@@ -8,7 +8,7 @@ export default () => {
   return (
       <div className="page-content">
         <LinksListFilters/>
-        <AddClient/>
+        <AddLink/>
         <LinksList/>
       </div>
   );

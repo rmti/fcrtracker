@@ -44,7 +44,7 @@ export default class FCRAppBar extends React.Component {
         } />}/>
 
         <Drawer open={this.state.open}>
-          <AppBar title="Menu" showMenuIconButton={true} iconElementLeft={< IconButton > <ArrowBack/> < /IconButton>} onLeftIconButtonTouchTap={this.handleToggle.bind(this)}/>
+          <AppBar title="Menu" showMenuIconButton={true} iconElementLeft={<IconButton > <ArrowBack/> </IconButton>} onLeftIconButtonTouchTap={this.handleToggle.bind(this)}/>
           <Menu>
             <MenuItem value="Invoice" primaryText="Invoices" leftIcon={< Description />} onTouchTap={this.handleToggle.bind(this)} containerElement={< Link to = "/invoice" />}/>
             <MenuItem value="PaymentMenu" primaryText="Payments" leftIcon={< Payment />}/>

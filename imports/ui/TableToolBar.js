@@ -7,6 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import AddClient from './AddClient';
 
 export default class TableToolbar extends React.Component {
 
@@ -26,7 +27,8 @@ export default class TableToolbar extends React.Component {
           <ToolbarTitle text="Clients" />
           <FontIcon className="muidocs-icon-custom-sort" />
           <ToolbarSeparator />
-          <RaisedButton label="Add Client" primary={false} />
+         <AddClient />
+         
         </ToolbarGroup>
       </Toolbar>
     );

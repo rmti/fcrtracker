@@ -24,6 +24,36 @@ const clientOne = {
   name: "test"
 };
 
+ const styles = {
+   smallIcon: {
+     width: 18,
+     height: 18,
+   },
+   mediumIcon: {
+     width: 48,
+     height: 48,
+   },
+   largeIcon: {
+     width: 60,
+     height: 60,
+   },
+   small: {
+     width: 18,
+     height: 18,
+     padding: 2,
+   },
+   medium: {
+     width: 96,
+     height: 96,
+     padding: 24,
+   },
+   large: {
+     width: 120,
+     height: 120,
+     padding: 30,
+   },
+ };
+
 export default class ClientsList extends React.Component {
   constructor(props) {
     super(props);
@@ -48,8 +78,6 @@ export default class ClientsList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount ClientsList');
-    this.handleInsert();
     this.clientsTracker = Tracker.autorun(() => {
       Meteor.subscribe('clients');
       const clients = Clients
@@ -86,9 +114,12 @@ export default class ClientsList extends React.Component {
     <Table>
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         < TableRow >
-          <TableHeaderColumn>ID</TableHeaderColumn>
           <TableHeaderColumn>Name</TableHeaderColumn>
-          <TableHeaderColumn>Status</TableHeaderColumn>
+          <TableHeaderColumn>Address</TableHeaderColumn>
+          <TableHeaderColumn>City</TableHeaderColumn>
+          <TableHeaderColumn>State</TableHeaderColumn>
+          <TableHeaderColumn>Zip</TableHeaderColumn>
+          <TableHeaderColumn></TableHeaderColumn>
         </TableRow>
       </TableHeader>
 
@@ -96,15 +127,15 @@ export default class ClientsList extends React.Component {
         {this.state.clients.map((client) => {
             return (
               <TableRow key={client._id}>
-                <TableRowColumn>
-                  {client._id}
-                </TableRowColumn>
-                <TableRowColumn>
-                  {client.name}
-                </TableRowColumn>
-                <TableRowColumn >
-                  {client.name}
-                </TableRowColumn>
+                <TableRowColumn>{client.name}</TableRowColumn>
+                <TableRowColumn >{client.address}</TableRowColumn>
+                 <TableRowColumn >{client.city}</TableRowColumn>
+                 <TableRowColumn >{client.state}</TableRowColumn>
+                <TableRowColumn >{client.zip}</TableRowColumn>
+                 <TableRowColumn>
+                   <IconButton iconStyle={styles.smallIcon} style={styles.small}><ActionEdit /></IconButton>
+                   <IconButton iconStyle={styles.smallIcon} style={styles.small}><ActionDelete /></IconButton>
+                 </TableRowColumn>
               </TableRow>
             );
           })
